@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ blog.title }} | Zingkes Blog</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            classy: ['"Poppins"', 'sans-serif'],
+          },
+          keyframes: {
+            fadeUp: {
+              '0%': { opacity: 0, transform: 'translateY(40px)' },
+              '100%': { opacity: 1, transform: 'translateY(0)' },
+            }
+          },
+          animation: {
+            fadeUp: 'fadeUp 0.8s ease-out forwards'
+          }
+        }
+      }
+    };
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-gradient-to-br from-gray-900 via-black to-gray-950 text-white font-classy scroll-smooth min-h-screen flex flex-col justify-center items-center px-4">
+
+  <!-- Blog Container -->
+  <div class="max-w-4xl w-full bg-white/5 border border-white/10 rounded-3xl shadow-lg backdrop-blur-md p-10 animate-fadeUp">
+    
+    <!-- Title -->
+    <h1 class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-yellow-400 to-indigo-400 mb-6">
+      {{ blog.title }}
+    </h1>
+    
+    <!-- Description -->
+    <p class="text-lg text-gray-300 leading-relaxed mb-8">
+      {{ blog.description }}
+    </p>
+    
+    <!-- Date -->
+    <p class="text-sm text-gray-400 italic">📅 Created at: {{ blog.created_at }}</p>
+
+    <!-- Back Button -->
+    <div class="mt-10">
+      <a href="/" class="text-pink-400 hover:underline hover:text-pink-300 transition text-sm">&larr; Back to Home</a>
+    </div>
+  </div>
+
+</body>
+</html>

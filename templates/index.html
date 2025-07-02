@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🔥 Zingkes Blog</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Tailwind Animation Config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              classy: ['"Poppins"', 'sans-serif'],
+            },
+            keyframes: {
+              fadeUp: {
+                '0%': { opacity: 0, transform: 'translateY(40px)' },
+                '100%': { opacity: 1, transform: 'translateY(0)' },
+              },
+              shimmer: {
+                '0%': { backgroundPosition: '-700px 0' },
+                '100%': { backgroundPosition: '700px 0' },
+              },
+            },
+            animation: {
+              fadeUp: 'fadeUp 0.8s ease-out forwards',
+              shimmer: 'shimmer 2s infinite linear',
+            },
+            backgroundImage: {
+              shimmer: 'linear-gradient(to right, #ffffff1a 0%, #ffffff4d 50%, #ffffff1a 100%)',
+            },
+          }
+        }
+      }
+    </script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  </head>
+
+  <body class="min-h-screen flex flex-col bg-gradient-to-br from-gray-900 via-black to-gray-950 text-white font-classy scroll-smooth">
+
+  <!-- MAIN CONTENT AREA -->
+  <div class="flex-grow">
+    <!-- HEADER -->
+    <header class="text-center py-16">
+      <h1 class="text-5xl leading-[1.2] font-bold bg-gradient-to-r from-pink-500 via-yellow-400 to-indigo-400 bg-clip-text text-transparent animate-fadeUp relative z-20">
+        📝 Zingkes Blog Zone
+      </h1>
+    </header>
+
+    <!-- BLOG LIST -->
+    <main class="max-w-5xl mx-auto px-6 grid gap-10">
+      <div class="flex justify-end mb-8">
+        <a href="create/"
+          class="bg-pink-600 hover:bg-pink-700 text-white font-medium px-4 py-2 rounded-3xl transition duration-200">
+          ➕ Create Post
+        </a>
+      </div>
+
+      {% for item in allblogs reversed %}
+        <a href="{% url 'blogs' item.id %}">
+          <div class="group hover:cursor-pointer bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl shadow-xl transition duration-500 p-8 animate-fadeUp hover:scale-105 hover:shadow-pink-500/30 transform">
+          <h2 class="text-2xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-yellow-400 to-indigo-400 mb-6">{{ item.title }}</h2>
+          <p class="text-gray-300 text-lg leading-relaxed mb-4 line-clamp-1 ">{{ item.description }}</p>
+          <div class="flex items-center justify-between mt-6 text-sm px-2">
+            <p class="text-gray-400 italic">📅 Created at: {{ item.created_at }}</p>
+
+            <div class="flex gap-3">
+              <!-- Edit Button -->
+              <a href="/edit/{{ item.id }}"
+                class="inline-flex items-center gap-1 px-3 py-1.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/30 hover:bg-blue-500 hover:text-white transition duration-200 ease-in-out shadow-sm hover:shadow-blue-500/30">
+                ✏️ Edit
+              </a>
+              <!-- Delete Button -->
+              <a href="/delete/{{ item.id }}"
+                class="inline-flex items-center gap-1 px-3 py-1.5 rounded-md bg-red-500/10 text-red-400 border border-red-500/30 hover:bg-red-500 hover:text-white transition duration-200 ease-in-out shadow-sm hover:shadow-red-500/30">
+                🗑️ Delete
+              </a>
+
+            </div>
+          </div>
+
+        </div>
+        </a>
+      {% endfor %}
+      {% if not allblogs %}
+        <div class="text-center text-gray-400 italic">
+          <p class="text-2xl font-semibold mb-4">No blogs available yet!</p>
+          <img src="https://i.pinimg.com/736x/b3/58/7b/b3587b45f82e831a3d0efacc89e9237c.jpg" class="
+            mx-auto w-64 h-64 object-cover rounded-full shadow-lg transition-transform duration-500 hover:scale-105"
+            loading="lazy"
+            alt="">
+        </div>
+      {% endif %}
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="text-center mt-auto py-6">
+    <div class="inline-block bg-shimmer bg-[length:1000px_100%] text-gray-300 text-sm rounded-xl px-6 py-3 animate-shimmer">
+      © 2025 Zingkes Blog. Made with ❤️.
+    </div>
+  </footer>
+
+  </body>
+
+</html>
